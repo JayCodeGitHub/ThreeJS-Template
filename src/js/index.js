@@ -8,23 +8,25 @@ const renderer = new THREE.WebGL1Renderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const colorPink = new THREE.Color('hsl(306,100%,60%)');
-const colorYellow = new THREE.Color('hsl(40,100%,60%)');
+const colorGreen = new THREE.Color(0x00ff00);
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshPhongMaterial( { color: colorYellow, shininess: 80, } );
+const geometry = new THREE.BoxGeometry(1,1,1);
+const material = new THREE.MeshBasicMaterial( { color: colorGreen, } );
 const cube = new THREE.Mesh( geometry, material );
-const light = new THREE.PointLight(colorPink, 2);
-
-light.position.x = -40;
-light.position.y = -20;
-light.position.z = 20;
-
-scene.add(light);
 scene.add(cube);
 
-camera.position.z = 15;
+camera.position.z = 5;
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    renderer.render( scene, camera );
+};
+
+animate();
 
 
-renderer.render( scene, camera );
 
